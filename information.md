@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-# Installation steps:-
+# Installation steps:- tony
 ## Overview
 The enterprise test automation framework is designed to provide a robust, scalable, and feature-rich solution for automated testing of the Salesforce application (AUT). The framework encompasses various features, including data-driven testing, logging, retry mechanism, self-healing, cross-browser testing, multiple environments, password encryption, code quality, CI/CD integration, reusable utilities, data generation, parallel testing, and API mocking/testing.
 
@@ -81,3 +81,14 @@ So this file is saying: I am defining a object for the login page.
    git remote add origin https://github.com/wasifGitHub/Project1.git
    git branch -M main
    git push -u origin main
+6. before pushing check with "git status" what are files where exculded or not tracked.
+7. To track all foler add it
+   git add .
+8. Now do initial commit
+   git commit -m "Initial commit"
+9. Whatever we have done , we have done in local. Now push it to git repository
+   git push
+   git push --set-upstream origin main  // looking for the main branch when you push first time
+10. Take Http share url from code and use it share it or if someone wants to clone it in their system then use below command
+   First create a folder then open terminal from the folder and type below command in the terminal.
+   git clone https://github.com/wasifGitHub/Project1.git
