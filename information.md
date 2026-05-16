@@ -97,10 +97,13 @@ So this file is saying: I am defining a object for the login page.
 ///////////////////////////////////////////////////////////////////////
 # dotenv:- 
 dotenv is used to manage the different env in the test
-1. Install:- npm install dotenv --save
+1. Install:- 
+
+   - npm install dotenv --save
 
 2. paste below code in playwright.config.js
    - NODE_ENV condition
+
    if(!process.env.NODE_ENV){
    require('dotenv').config({path:`${__dirname}//src//config//.env`});
    } else {
@@ -108,6 +111,7 @@ dotenv is used to manage the different env in the test
    }
 
    - Use below code in test to print the env values
+
    test("Sample env test", async ({page}) => {
    console.log(process.env.NODE_ENV); // return undefined if NODE_ENV is not set
    console.log(process.env.userid);
