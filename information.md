@@ -92,3 +92,34 @@ So this file is saying: I am defining a object for the login page.
 10. Take Http share url from code and use it share it or if someone wants to clone it in their system then use below command
    First create a folder then open terminal from the folder and type below command in the terminal.
    git clone https://github.com/wasifGitHub/Project1.git
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# dotenv:- 
+dotenv is used to manage the different env in the test
+1. Install:- npm install dotenv --save
+
+2. paste below code in playwright.config.js
+   // NODE_ENV condition
+   if(!process.env.NODE_ENV){
+   require('dotenv').config({path:`${__dirname}//src//config//.env`});
+   } else {
+   require('dotenv').config({path:`${__dirname}//src//config//.env.${process.env.NODE_ENV}`});
+   }
+
+   // Use below code in test to print the env values
+   test("Sample env test", async ({page}) => {
+   console.log(process.env.NODE_ENV); // return undefined if NODE_ENV is not set
+   console.log(process.env.userid);
+   console.log(process.env.password);
+   })
+
+3. How to set NODE_ENV ?
+   For window:
+   set NODE_ENV=qa
+   echo %NODE_ENV% // print value
+
+   For Mac
+   export NODE_ENV=qa ||  NODE_ENV=qa
+   echo $NODE_ENV
+   

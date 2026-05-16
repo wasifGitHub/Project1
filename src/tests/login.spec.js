@@ -8,8 +8,10 @@ test('test', async ({ page }) => {
   const loginPage = new LoginPage(page);
   // Step - 1 : open page
   await loginPage.navigateToLoginPage();
-  await loginPage.fillUsername('standard_user');
-  await loginPage.fillPassword('secret_sauce');
+  // await loginPage.fillUsername('standard_user');
+  // await loginPage.fillPassword('secret_sauce');
+   await loginPage.fillUsername(process.env.userid);
+  await loginPage.fillPassword(process.env.password);
 
   // Step - 2 : Login
   const homePage = await loginPage.clickLoginButton();
@@ -28,3 +30,9 @@ test('test', async ({ page }) => {
   await checkoutPage.continueBtn.first().waitFor({state:'visible'})
   console.log(`Test End!`)
 });
+
+test.skip("Sample env test", async ({page}) => {
+  console.log(process.env.NODE_ENV); // return undefined if NODE_ENV is not set
+  console.log(process.env.userid);
+  console.log(process.env.password);
+})
