@@ -116,10 +116,10 @@ dotenv is used to manage the different env in the test
 
 3. How to set NODE_ENV ?
    For window:
-   set NODE_ENV=qa
-   echo %NODE_ENV% // print value
+   - set NODE_ENV=qa
+   - echo %NODE_ENV% // print value
 
    For Mac
-   export NODE_ENV=qa ||  NODE_ENV=qa
-   echo $NODE_ENV
+   - export NODE_ENV=qa ||  NODE_ENV=qa
+   - echo $NODE_ENV
    
