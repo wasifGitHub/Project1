@@ -41,6 +41,11 @@ mkdir -p src/data
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
+# install browser engines
+npx playwright install
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 # Salesforce cred
 // userid=wasifahmad899.d26d11120cda@agentforce.com
 // password=Newuser135!
@@ -57,7 +62,7 @@ mkdir -p src/data
 Example -> const loginPage = new LoginPage(page);
 When this line runs, the constructor executes.
 
-## export class LoginPage {
+## export class LoginPage:-
 class -> creates a blueprint/object
 LoginPage -> represents the Login Page of the website
 export -> allows this class to be imported in other files
@@ -96,15 +101,20 @@ So this file is saying: I am defining a object for the login page.
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 # dotenv:- 
-dotenv is used to manage the different env in the test
+-dotenv is used to manage the different env in the test.
+-It loads environments variables from a .env file into process.env.
+-Using process.env you can access programmatically any variable from the .env file
+
 1. Install:- 
 
    - npm install dotenv --save
 
 2. paste below code in playwright.config.js
-   - NODE_ENV condition
+   - NODE_ENV condition (Its a system variable). 
+   - When we set the NODE_ENV from the runTime or Terminal we can just see this inside our code and based on the value we can pick up the different env file.
 
    if(!process.env.NODE_ENV){
+   // __dirname :- give you the current project folder
    require('dotenv').config({path:`${__dirname}//src//config//.env`});
    } else {
    require('dotenv').config({path:`${__dirname}//src//config//.env.${process.env.NODE_ENV}`});
@@ -128,3 +138,21 @@ dotenv is used to manage the different env in the test
    - export NODE_ENV=qa ||  NODE_ENV=qa
    - echo $NODE_ENV
    
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# CryptoJS | Encryption of Credentials:- 
+- For larger frameworks we will have different credentials and hardcoding every credential will be the risky thing and it will be against the security.
+- CruptoJs is a JavaScript library and it can be used for encryption and decryption
+- We will use the AES (Advance Encryption Standard) for encryp and dercpt value. However along with this we will be providing the secret passphrase or SALT value.
+- SALT value will be added inside your encryption and when you want to decrpt the same value should be used.
+
+1. Install cruptoJS
+   - npm install crypto-js // for normal JS
+   - npm install --save-dev @types/crypto-js // if you are using TypeScript
+
+2. utils folder
+   - set SALT Env in CryptojsUtil 
+   - For multiple entries use EncruptEnvFile
+   - From terminal
+   echo %SALT%
+   export $SALT=helloSalt
