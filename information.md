@@ -141,6 +141,7 @@ So this file is saying: I am defining a object for the login page.
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 # CryptoJS | Encryption of Credentials:- 
+- Doc link: https://cryptojs.gitbook.io/docs
 - For larger frameworks we will have different credentials and hardcoding every credential will be the risky thing and it will be against the security.
 - CruptoJs is a JavaScript library and it can be used for encryption and decryption
 - We will use the AES (Advance Encryption Standard) for encryp and dercpt value. However along with this we will be providing the secret passphrase or SALT value.
@@ -156,3 +157,69 @@ So this file is saying: I am defining a object for the login page.
    - From terminal
    echo %SALT%
    export $SALT=helloSalt
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# Logging with Winston:- 
+1. Helps in monitoring, debugging, and analysing the test execution process.
+2. Logging Levels: To categorize the severity of log messages. The common logging levels, in increasing order of severity are:
+- DEBUG: Detailed information during development and debugging.      Typically not included in production logs.
+- INFO: Provide informational message about the progress of the application or test. Usefull for monitoring the overall execution flow.
+- WARN (or WARNING): Indicates a Potential issue that does not necessarily stop the application or test. Alerts developers and testers to ptential problems.
+- ERROR: Indicates a failure or error that needs attention. Critical issues are often logged at this level.
+- FATAL(or CRITICAL): The most severe level, indicating a critical failure that might lead to application termination.
+3. Install Winston and timezone:
+- npm install winston
+- npm i moment-timezone
+4. logger.info(`Successfull`) or logger.error(`Error`)
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# Data Driven Testing:- 
+1. Data-driven testing in Playwright means running the same test with different sets of test data, such as multiple usernames, passwords, search terms, or form inputs.
+2. In Playwright, we can store data in an array, JSON, CSV, or Excel file and loop through it to create multiple test cases automatically.
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# Faker for Test Data Generation:- 
+1. Its not very practical that you will be creating your own test data evertime and it should be looks like a real time data and at the same time we should not use any production data.
+2. For that reason we are going to use utility called Faker from the JavaScript to generate the various types of data by using this module
+3. Link: https://fakerjs.dev/api/
+4. npm: to save faker data in csv and json
+   - npm install csv-writter
+   - npm install csvtojson
+5. Now create faker data in testdata folder and store in csv and json files
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# Retry for Flaky Tests:- 
+1. Playwright has default mechanisum for a retry mechanism.
+2. Retry mechanism happens at runTime. 
+3. We need to make the configuration in the playwright configuration file.
+   -   retries: process.env.CI ? 2 : 1,
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# Cross Browser Testing:- 
+1. Playwright has the prebuild/predefined support for the cross browser testing.
+2. Multiple browsers configuration are configured in the playwright configure file.
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# CICD GitHub Actions:- 
+1. In the longrun we should be running our test automation inside the cloude by using CICD pipelines.
+2. CICD is a contineous Integration and contneous delivery.
+3. There are different tools for CICD pipelines : GitHub Actions, Docker, Azure, Jenkins. "https://playwright.dev/docs/ci"
+4. We are taking GitHub Actions: 
+   - Its a CICD platform and automation platforms for running our test automation platforms.
+   - In all of these CICD pipelines we will be given with virtual machines where we will be running out test automation suit.
+   - Steps:
+   https://playwright.dev/docs/ci#github-actions
+   create .github\workflow folder and inside worflow create main.yml file and 
+   paste the code from above link
+
+
+
+
+

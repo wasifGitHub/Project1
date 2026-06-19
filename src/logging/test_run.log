@@ -1,0 +1,13 @@
+2026-06-19T22:22:04+05:30 [info]: Step1: Page open: https://www.saucedemo.com/
+2026-06-19T22:22:04+05:30 [info]: Enter Username
+2026-06-19T22:22:04+05:30 [info]: Enter password
+2026-06-19T22:22:05+05:30 [info]: Step2: Clicked login button
+2026-06-19T22:22:05+05:30 [info]: Swag Labs is visile
+2026-06-19T22:22:05+05:30 [info]: Login Successful!
+2026-06-19T22:22:05+05:30 [info]: Clicked addToCart
+2026-06-19T22:22:05+05:30 [info]: Step3: Item has been added to the cart.
+2026-06-19T22:22:05+05:30 [info]: Step4: Clicked Cart Icon
+2026-06-19T22:22:05+05:30 [info]: Cart Page loaded
+2026-06-19T22:22:05+05:30 [info]: Step5: Click Checkout
+2026-06-19T22:22:05+05:30 [info]: Checkout Page loaded
+2026-06-19T22:22:05+05:30 [info]: Test End!

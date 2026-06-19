@@ -1,5 +1,6 @@
 import {Page, expect} from "@playwright/test"
 import {CheckoutPage} from "./checkoutPage"
+import logger from "../utils/LoggerUtil";
 
 export class CartPage {
     constructor(page) {
@@ -10,12 +11,12 @@ export class CartPage {
 
     async verifyCartPageLoaded(){
         await expect(this.checkoutBtn).toBeVisible();
-        console.log(`Cart Page loaded`);
+        logger.info(`Cart Page loaded`);
     }
 
     async clickCheckout(){
         await this.checkoutBtn.first().click();
-        console.log(`Step5: Click Checkout`);
+        logger.info(`Step5: Click Checkout`);
 
         const checkoutPage = new CheckoutPage(this.page);
         return checkoutPage;

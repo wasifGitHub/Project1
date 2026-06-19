@@ -1,5 +1,7 @@
 import {Page, expect} from "@playwright/test"
 import {CartPage} from "./cartPage"
+import logger from "../utils/LoggerUtil"
+import { error } from "console";
 
 export class HomePage {
     constructor(page){
@@ -12,21 +14,29 @@ export class HomePage {
     }
 
     async verifyLoginSuccess(locator){
-        await expect(locator).toBeVisible({timeout:10000})
-        console.log(`Login Successful!`)
+        await expect(locator).toBeVisible({timeout:10000}).catch((error)=>{
+            logger.error(`Error Missing Swag Labs: ${error}`);
+            throw error;
+        }).then(()=>{
+            logger.info("Swag Labs is visile")
+        })
     }
 
     async addToCart(){
-        await this.addToCartBtn.first().click();
+        await this.addToCartBtn.first().click().catch((error)=>{
+            logger.error(`Error clicking addToCart: ${error}`);
+            throw error
+        }).then(()=>logger.info(`Clicked addToCart`));
         await expect(this.verifyItemAdded).toBeVisible({timeout:10000});
-        console.log(`Step3: Item has been added to the cart.`)
+        logger.info(`Step3: Item has been added to the cart.`)
         await expect(this.cartIcon).toBeVisible({timeout:10000});
     }
 
     async clickCartIcon(){
-        await this.cartIcon.first().click()
-        console.log(`Step4: Go to cart`)
-
+        await this.cartIcon.first().click().catch((error)=>{
+            logger.error(`Error clicking CartIcon: ${error}`);
+            throw error
+        }).then(()=>logger.info(`Step4: Clicked Cart Icon`));
         const cartPage = new CartPage(this.page);
         return cartPage
     }

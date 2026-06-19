@@ -1,4 +1,5 @@
 import {Page, expect} from "@playwright/test"
+import logger from "../utils/LoggerUtil"
 
 export class CheckoutPage{
     constructor(page){
@@ -9,6 +10,6 @@ export class CheckoutPage{
 
     async verifyCheckoutPageLocaded(){
         await expect(this.firstName).toBeVisible();
-        console.log(`Checkout Page loaded`);
+        logger.info(`Checkout Page loaded`);
     }
 }
