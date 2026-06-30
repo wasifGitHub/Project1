@@ -8,15 +8,15 @@ The enterprise test automation framework is designed to provide a robust, scalab
 1. Node JS : A JavaScript runtime environment used to run Playwright tests on our system. Type node in terminal to verify its present
 2. VS Code
 3. ES Lint :- Static code analyzer , which will give a quality, readable , good formating and maintainable code.
-4. Playwright Module
-5. Playwright runner Extension
-6. GIT
+4. Playwright Module : Install Playwright
+5. Playwright runner Extension : A runner to execute our test cases.
+6. GIT : Push your code to git repository.
 
 ## Install Playwright commands and steps
-npm : Defailt comes with the NodeJS. Open source developers from every continent use npm(Node Package Manager) to share and borrow packages 
+npm : Default comes with the NodeJS. Open source developers from every continent use npm(Node Package Manager) to share and borrow packages 
 npx : Node Package Excecute install
 1. Install : npm init playwright@latest / npm install @playwright/test@1.40.0 (for macos12 old version)
-2. Install ES Lint
+2. Install ES Lint from vs code extenstion
 3. Install Playwright from extention for Playwright runner Extention
 4. Install Browser Engine after creating project structure below:- 
    npx playwright install
@@ -37,7 +37,7 @@ mkdir -p src/data
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 # playwright.config.js or ts:-
-1. This is where we mention where should our tests find the tests cases "testDir"
+1. This is where we mention where should our framework find the tests cases "testDir"
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -216,10 +216,85 @@ So this file is saying: I am defining a object for the login page.
    - In all of these CICD pipelines we will be given with virtual machines where we will be running out test automation suit.
    - Steps:
    https://playwright.dev/docs/ci#github-actions
-   create .github\workflow folder and inside worflow create main.yml file and 
-   paste the code from above link
+   create .github\workflow folder and inside worflow create main.yml file and paste the code from above link
+   go to your github repository and click on Action and run workflow
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# ES Lint Set up:- 
+1. Its a static code analyser. It will help us to find and fix the problem.
+2. Need to watch again
 
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# Skip Login using Storage State:- 
+1. While scripting everytime its not feasible to login to the window by providing the credentials. For that reason we are going to use the storage state from the playwright.
+2. Once you login , your credential, cookie, sessions , every state will be saved into the files. Next time when you go to the new test case you dont need to login from the scratch.
+3. Use sample code as below.
+
+   - Define authFile at top outside the test.
+      const authFile = "src/config/auth.json";
+     Paste below code after login to save te auth file
+      await page.context().storageState({path: authFile});
+      logger.info(`Auth store is saved.`);
+   - test('Login with auth file', ({ browser }) => {
+      const context = await browser.newContext({ storageState: authFile});
+      const page = await context.newPage();
+      await page.goto(`https://www.saucedemo.com/inventory.html`)
+      await page.getByRole('button',{name: 'Add to cart'})
+   }) 
+4. Codegen: https://playwright.dev/docs/codegen
+   - Run below command it will open a recorder , login manually and then close the browser it will save the storage state into auth.json.
+   - npx playwright codegen --save-storage=auth.json https://www.saucedemo.com/
+   - to reuse it use:
+      test.use({ storageState: 'auth.json' });
+      or
+      Use below command to reopen the page after login and continue recording.
+      npx playwright codegen --load-storage=auth.json https://www.saucedemo.com/inventory.html
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# Serial And Paralled mode execution:- 
+
+   - Serial = one after another. Parallel = multiple tests at the same time.
+   - test.describe.configure({ mode: 'serial' });
+   - test.describe.configure({ mode: 'parallel' });
+   - Define page at top to have access in all tests
+      let page;
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+# Custom Fixtures:- 
+1. Let say you want to check some senarios on the homepage which loads after login then all is need you to be on this page. So for that reason you need to write down the custom fixtures.
+2. In above case you need to write down for login page so that this fixtures can be used in different tests cases
+3. A simple way to create a custom fixtures :
+   - test.use({ myFixture: async() => {
+      // This code will be executed before each test that uses this fixture
+   }})
+
+   test('my test', async ({ page, myFixture }) => {
+      // ...
+   })
+4. But , this way of creating fixture may not be usefull in other tests cases becuase everybody can write there own way of fixtures. To avoid this confusion and to have a centralized fixtures we create a sperate folder for fixtures and there we can write all our custom fixtures.
+5. Whenever you try to call fixtures it will execute before the test execution.
+5. More in details:
+- Test fixtures is a kind of function in the playwright that can run some code for you beforeTest or afterTest hooks.
+- Fixtires has some functionaillity that makes this functionality bit better than just before each hooks. 
+   Example Hooks:
+   test.beforeEach("Hello", async({}) => {
+      console.log(`Hello`);
+   })
+   test("Where is my candy", async({}) => {
+      console.log(`Where is my candy`);
+   })
+   test("I am alive", async({}) => {
+      console.log(`I am alive`)
+   })
+   test.afterAll("Test end", async({}) => {
+      console.log(`Test End`);
+   })
+- Lets refactor above code with Fixtures : Go to project2 fixture.
 
 
 

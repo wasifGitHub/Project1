@@ -7,8 +7,11 @@ import { demoOutput } from '../utils/fakersample';
 import { Faker } from '@faker-js/faker';
 import { faker } from '../utils/fakersample';
 import { exportToCsv, exportToJson, generateTestData } from '../utils/FakerDataUtil';
+import testData from "../testdata/testData_en.json"
 
-test('test', async ({ page }) => {
+const authFile = "src/config/auth.json";
+
+test.skip('test', async ({ page }) => {
   // Creates an object of LoginPage class:
   // constructor runs
   // locators are created
@@ -27,6 +30,8 @@ test('test', async ({ page }) => {
   await expect(homePage.verifySuccessLogin).toBeVisible();
   await homePage.verifyLoginSuccess(homePage.verifySuccessLogin);
   logger.info(`Login Successful!`)
+  await page.context().storageState({path: authFile});
+  logger.info(`Auth store is saved.`);
 
   // Step - 3 : Add To Cart
   await homePage.addToCart();
@@ -72,4 +77,21 @@ test.skip('Faker', async({ page }) => {
 
   // Export data to csv file
   exportToCsv(testData,'testData_en.csv');
+})
+
+// npx playwright codegen --save-storage=auth.json https://www.saucedemo.com/
+// test.use({ storageState: 'auth.json' });
+// test.use({ storageState: 'src/config/auth.json' });
+test.skip('Login withh auth file', async ({ page }) => {
+  // const context = await browser.newContext({ storageState: authFile});
+  // const page = await context.newPage();
+  await page.goto(`https://www.saucedemo.com/inventory.html`)
+  await page.locator(`//button[@id='add-to-cart-sauce-labs-backpack']`).first().waitFor({state:'visible',timeout:5000})
+  logger.info("Add to cart is visible")
+  await page.waitForTimeout(5000)
+})
+
+test('test data', async({page})=>{
+  console.log(testData);
+
 })
