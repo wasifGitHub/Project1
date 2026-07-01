@@ -185,6 +185,7 @@ So this file is saying: I am defining a object for the login page.
 1. Its not very practical that you will be creating your own test data evertime and it should be looks like a real time data and at the same time we should not use any production data.
 2. For that reason we are going to use utility called Faker from the JavaScript to generate the various types of data by using this module
 3. Link: https://fakerjs.dev/api/
+4. npm install --save-dev @Faker-js/faker
 4. npm: to save faker data in csv and json
    - npm install csv-writter
    - npm install csvtojson
@@ -197,12 +198,16 @@ So this file is saying: I am defining a object for the login page.
 2. Retry mechanism happens at runTime. 
 3. We need to make the configuration in the playwright configuration file.
    -   retries: process.env.CI ? 2 : 1,
+4. control retires from the terminal itself:
+   npx playwright test loginTest.spec.ts --headed --retries=2
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 # Cross Browser Testing:- 
 1. Playwright has the prebuild/predefined support for the cross browser testing.
 2. Multiple browsers configuration are configured in the playwright configure file.
+3. The main moto of using cross browser Testing is the user should have the same experience no matter which browser they are using
+4. In playwright.config file you can config the device type in project such as iphone or pixel5 or other.
 
 
 ///////////////////////////////////////////////////////////////////////
