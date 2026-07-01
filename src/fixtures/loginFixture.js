@@ -1,6 +1,6 @@
 import { test as base, expect as defaultExpect } from "@playwright/test";
-import LoginPage from "../pages/LoginPage";
-import HomePage from "../pages/HomePage";
+import LoginPage from "../pages/loginPage";
+import HomePage from "../pages/homePage";
 import { decrypt } from "../utils/CryptojsUtil";
 
 // const UIPages = {
