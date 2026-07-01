@@ -100,3 +100,7 @@
 2026-07-02T01:20:06+05:30 [info]: Step5: Click Checkout
 2026-07-02T01:20:06+05:30 [info]: Checkout Page loaded
 2026-07-02T01:20:06+05:30 [info]: Test End!
+2026-07-02T01:42:18+05:30 [info]: Step1: Page open: https://www.saucedemo.com/
+2026-07-02T01:42:18+05:30 [info]: Enter Username
+2026-07-02T01:42:18+05:30 [info]: Enter password
+2026-07-02T01:42:19+05:30 [info]: Step2: Clicked login button

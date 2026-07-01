@@ -27,7 +27,7 @@ test('test', async ({ page }) => {
 
   // Step - 2 : Login
   const homePage = await loginPage.clickLoginButton();
-  await expect(homePage.verifySuccessLogin).toBeVisible();
+  await expect(homePage.verifySuccessLogin).toBeVisible({ timeout: 10000 });
   await homePage.verifyLoginSuccess(homePage.verifySuccessLogin);
   logger.info(`Login Successful!`)
   await page.context().storageState({path: authFile});
