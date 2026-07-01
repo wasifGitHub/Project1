@@ -19,11 +19,11 @@ test('test', async ({ page }) => {
   const loginPage = new LoginPage(page);
   // Step - 1 : open page
   await loginPage.navigateToLoginPage();
-  // await loginPage.fillUsername('standard_user');
-  // await loginPage.fillPassword('secret_sauce');
+  await loginPage.fillUsername('standard_user');
+  await loginPage.fillPassword('secret_sauce');
   // export $SALT=helloSalt
-  await loginPage.fillUsername(decrypt(process.env.userid));
-  await loginPage.fillPassword(decrypt(process.env.password));
+  // await loginPage.fillUsername(decrypt(process.env.userid));
+  // await loginPage.fillPassword(decrypt(process.env.password));
 
   // Step - 2 : Login
   const homePage = await loginPage.clickLoginButton();

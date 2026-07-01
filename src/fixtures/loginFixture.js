@@ -13,8 +13,10 @@ export const test = base.extend({
   homePage: async ({ page }, use) => {
     const loginPage = new LoginPage(page);
     await loginPage.navigateToLoginPage();
-    await loginPage.fillUsername(decrypt(process.env.userid));
-    await loginPage.fillPassword(decrypt(process.env.password));
+    // await loginPage.fillUsername(decrypt(process.env.userid));
+    // await loginPage.fillPassword(decrypt(process.env.password));
+    await loginPage.fillUsername('standard_user');
+    await loginPage.fillPassword('secret_sauce');
     const homePage = await loginPage.clickLoginButton();
     await use(homePage);
   },
