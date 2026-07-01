@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import LoginPage from '../pages/LoginPage';
+import LoginPage from '../pages/loginPage';
 import { decrypt, encrypt } from '../utils/CryptojsUtil';
 import { encryptEnvFile, decryptEnvFile } from '../utils/EncryptEnvFile';
 import logger from '../utils/LoggerUtil';
@@ -11,7 +11,7 @@ import testData from "../testdata/testData_en.json"
 
 const authFile = "src/config/auth.json";
 
-test.skip('test', async ({ page }) => {
+test('test', async ({ page }) => {
   // Creates an object of LoginPage class:
   // constructor runs
   // locators are created
@@ -60,7 +60,7 @@ test.skip("Sample cryptoJS env test", async ({page}) => {
   console.log(`Encrypted: ${encryptedText}`); 
   const decryptedText = decrypt(encryptedText);
   console.log(`Decrypted: ${decryptedText}`);
-  // encryptEnvFile();
+  encryptEnvFile();
   // decryptEnvFile();
 })
 
